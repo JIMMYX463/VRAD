@@ -1,0 +1,32 @@
+{
+  "name": "f5m-vrad",
+  "productName": "F-5M VRAD",
+  "version": "1.0.0",
+  "description": "Simulación del radar virtual (VRAD/VRWR) del F-5M",
+  "main": "main.js",
+  "author": "JIMMYX463",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "electron": "31.3.1",
+    "electron-builder": "24.13.3"
+  },
+  "build": {
+    "appId": "es.jimmyx463.f5mvrad",
+    "productName": "F-5M VRAD",
+    "files": ["main.js", "index.html"],
+    "directories": { "buildResources": "build", "output": "dist" },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["universal"] }],
+      "category": "public.app-category.education",
+      "identity": null
+    },
+    "dmg": { "title": "F-5M VRAD" },
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }, { "target": "portable", "arch": ["x64"] }]
+    },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "shortcutName": "F-5M VRAD" },
+    "portable": { "artifactName": "F-5M-VRAD-portable-${version}.exe" },
+    "publish": null
+  }
+}
