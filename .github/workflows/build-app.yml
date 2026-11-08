@@ -1,7 +1,8 @@
 name: Compilar app de escritorio
 on:
   push:
-    tags: ['app-v*']
+    branches: [main]
+    paths: ['app/**', 'index.html', '.github/workflows/build-app.yml']
   workflow_dispatch:
 permissions:
   contents: write
@@ -44,7 +45,6 @@ jobs:
           if-no-files-found: error
   release:
     needs: build
-    if: startsWith(github.ref, 'refs/tags/app-v')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -53,7 +53,10 @@ jobs:
           merge-multiple: true
       - uses: softprops/action-gh-release@v2
         with:
-          name: F-5M VRAD ${{ github.ref_name }}
+          tag_name: app-v1.0.${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          name: F-5M VRAD 1.0.${{ github.run_number }}
+          make_latest: true
           files: out/*
           body: |
             Aplicación de escritorio de la simulación F-5M VRAD (mismo acceso cifrado que la web).
